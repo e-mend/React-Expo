@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "jesus-loves-you",
-    "slug": "jesus-loves-you",
+    "name": "calculo de holerite",
+    "slug": "holerite",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
@@ -25,7 +25,14 @@
     "web": {
       "bundler": "metro",
       "output": "static",
-      "favicon": "./assets/images/favicon.png"
+      "favicon": "./assets/images/favicon.png",
+      "build": {
+        "babel": {
+          "include": [
+            "@ui-kitten/components"
+          ]
+        }
+      }
     },
     "plugins": [
       "expo-router"
