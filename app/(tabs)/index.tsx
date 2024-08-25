@@ -1,13 +1,26 @@
-import { Image, StyleSheet } from 'react-native';
-
+import { Image, StyleSheet }  from 'react-native';
+import { useState, useEffect } from 'react';
 import { HelloWave } from '@/components/HelloWave';
 import MoneyInput from '@/components/MoneyInput';
+import MoneyInputDesc from '@/components/MoneyInputDesc';
 import { ThemedText } from '@/components/ThemedText';
 import { ThemedView } from '@/components/ThemedView';
 import DatePicker from '@/components/DatePicker';
 import ParallaxScrollView from '@/components/ParallaxScrollView';
+import Result from '@/components/Result';
 
 export default function HomeScreen() {
+
+  const [inputFields, setInputFields] = useState([
+    { id: 1, value: '', name: 'Salário Bruto'},
+  ]);
+
+  const [inputFieldsDesc, setInputFieldsDesc] = useState([
+    { id: 1, value: '0', name: 'IRRF', type: 'Porcentagem' },
+    { id: 2, value: '0', name: 'INSS', type: 'Porcentagem' },
+    { id: 3, value: '6', name: 'Vale Transporte', type: 'Porcentagem' },
+  ]);
+
   return (
     <ParallaxScrollView
       headerBackgroundColor={{ light: '#A1CEDC', dark: 'white' }}
@@ -23,22 +36,26 @@ export default function HomeScreen() {
         <HelloWave />
       </ThemedView>
       <ThemedView style={styles.stepContainer}>
-        <ThemedText type="subtitle">1 - Adicione as entradas:</ThemedText>
-        <MoneyInput />
+        <ThemedText type="subtitle">
+          1 - Adicione as entradas (exemplo: salário bruto, horas extras, comissões):
+        </ThemedText>
+        <MoneyInput onValueChange={setInputFields} list={inputFields} />
       </ThemedView>
       <ThemedView style={styles.stepContainer}>
-        <ThemedText type="subtitle">2 - Adicione a quantidade de horas trabalhadas:</ThemedText>
-        <ThemedText>
+        <ThemedText type="subtitle">
+          2 - Adicione os descontos:
         </ThemedText>
+        <MoneyInputDesc
+          onValueChange={setInputFieldsDesc}
+          list={inputFieldsDesc}
+          moneyInputList={inputFields}
+         />
       </ThemedView>
       <ThemedView style={styles.stepContainer}>
-        <ThemedText type="subtitle">Step 3: Get a fresh start</ThemedText>
-        <ThemedText>
-          <ThemedText type="defaultSemiBold">npm run reset-project</ThemedText> to get a fresh{' '}
-          <ThemedText type="defaultSemiBold">app</ThemedText> directory. This will move the current{' '}
-          <ThemedText type="defaultSemiBold">app</ThemedText> to{' '}
-          <ThemedText type="defaultSemiBold">app-example</ThemedText>.
+        <ThemedText type="subtitle">
+          3 - Resultado:
         </ThemedText>
+        <Result entryList={inputFields} descList={inputFieldsDesc} />
       </ThemedView>
     </ParallaxScrollView>
   );

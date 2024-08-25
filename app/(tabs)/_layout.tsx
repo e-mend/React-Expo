@@ -24,15 +24,6 @@ export default function TabLayout() {
           ),
         }}
       />
-      <Tabs.Screen
-        name="result"
-        options={{
-          title: 'Resultado',
-          tabBarIcon: ({ color, focused }) => (
-            <TabBarIcon name={focused ? 'list' : 'list-outline'} color={color} />
-          ),
-        }}
-      />
     </Tabs>
   );
 }
